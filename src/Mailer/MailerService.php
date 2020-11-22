@@ -198,8 +198,8 @@ class MailerService
     public function sendForgotLinkMail(string $email): bool
     {
         /** @var Participant[] $participatingIn */
-        $participatingIn = $this->em->getRepository('IntractoSecretSantaBundle:Participant')->findAllParticipantsForForgotEmail($email);
-        $adminOf = $this->em->getRepository('IntractoSecretSantaBundle:Party')->findAllAdminParties($email);
+        $participatingIn = $this->em->getRepository(Participant::class)->findAllParticipantsForForgotEmail($email);
+        $adminOf = $this->em->getRepository(Party::class)->findAllAdminParties($email);
 
         if (count($adminOf) === 0 && count($participatingIn) === 0) {
             return false;
@@ -274,7 +274,7 @@ class MailerService
      */
     public function sendReuseLinksMail(string $email): bool
     {
-        $results = $this->em->getRepository('IntractoSecretSantaBundle:Party')->findPartiesToReuse($email);
+        $results = $this->em->getRepository(Party::class)->findPartiesToReuse($email);
 
         if (count($results) === 0) {
             return false;

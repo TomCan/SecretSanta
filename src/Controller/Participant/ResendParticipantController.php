@@ -33,7 +33,7 @@ class ResendParticipantController extends AbstractController
 
     /**
      * @Route("/resend/{listurl}/{participantUrl}", name="resend_participant")
-     * @ParamConverter("participant", class="IntractoSecretSantaBundle:Participant", options={"mapping": {"participantUrl": "url"}})
+     * @ParamConverter("participant", class="App\Entity\Participant", options={"mapping": {"participantUrl": "url"}})
      * @Method("GET")
      */
     public function resendAction($listurl, Participant $participant)

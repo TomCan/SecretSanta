@@ -6,16 +6,16 @@ privacy:
   path: /privacy
   defaults:
     _controller:  FrameworkBundle:Template:template
-    template:     'IntractoSecretSantaBundle:Static:privacyPolicy.html.twig'
+    template:     'Static/privacyPolicy.html.twig'
 
 faq:
   path: /faq
   defaults:
     _controller:  FrameworkBundle:Template:template
-    template:     'IntractoSecretSantaBundle:Static:faq.html.twig'
+    template:     'Static/faq.html.twig'
 
 cookie:
   path: /cookie
   defaults:
     _controller:  FrameworkBundle:Template:template
-    template:     'IntractoSecretSantaBundle:Static:cookiePolicy.html.twig'
+    template:     'Static/cookiePolicy.html.twig'

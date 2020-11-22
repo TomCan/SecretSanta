@@ -20,7 +20,7 @@ class ExcludeParticipantType extends AbstractType
             $form = $event->getForm();
 
             $form->add('excluded_participants', EntityType::class, [
-                'class' => 'IntractoSecretSantaBundle:Participant',
+                'class' => 'App\Entity\Participant',
                 'multiple' => true,
                 'expanded' => false,
                 'choice_label' => 'name',

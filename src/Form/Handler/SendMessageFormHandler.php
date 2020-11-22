@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form\Handler;
 
+use App\Entity\Participant;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Mailer\MailerService;
@@ -46,7 +47,7 @@ class SendMessageFormHandler
         $message = $form->getData()['message'];
         $senderId = $form->getData()['participant'];
 
-        $sender = $this->em->getRepository('IntractoSecretSantaBundle:Participant')->findOneBy(['url' => $senderId]);
+        $sender = $this->em->getRepository(Participant::class)->findOneBy(['url' => $senderId]);
         if (null === $sender) {
             $this->session->getFlashBag()->add('danger', $this->translator->trans('participant_communication-send_message.feedback.error'));
 

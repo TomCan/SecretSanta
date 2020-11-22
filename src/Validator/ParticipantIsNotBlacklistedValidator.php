@@ -2,6 +2,7 @@
 
 namespace App\Validator;
 
+use App\Entity\BlacklistEmail;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\HashService;
 use Symfony\Component\Validator\Constraint;
@@ -34,7 +35,7 @@ class ParticipantIsNotBlacklistedValidator extends ConstraintValidator
     public function validate($email, Constraint $constraint)
     {
         $email = $this->hashService->hashEmail($email);
-        $repository = $this->em->getRepository('IntractoSecretSantaBundle:BlacklistEmail');
+        $repository = $this->em->getRepository(BlacklistEmail::class);
         $results = $repository->createQueryBuilder('b')
             ->where('b.email = :email')
             ->setParameter('email', $email)

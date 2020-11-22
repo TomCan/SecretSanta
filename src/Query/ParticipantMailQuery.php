@@ -35,7 +35,7 @@ class ParticipantMailQuery
 
         $query = $this->em->createQuery('
             SELECT participant
-            FROM IntractoSecretSantaBundle:Participant participant
+            FROM Participant participant
               JOIN participant.party party
             WHERE participant.wishlistUpdated = 0
               AND party.created = 1
@@ -72,7 +72,7 @@ class ParticipantMailQuery
 
         $query = $this->em->createQuery('
             SELECT participant
-            FROM IntractoSecretSantaBundle:Participant participant
+            FROM Participant participant
               JOIN participant.party party
             WHERE participant.viewdate IS NULL
               AND party.created = 1
@@ -103,7 +103,7 @@ class ParticipantMailQuery
 
         $query = $this->em->createQuery('
             SELECT participant
-            FROM IntractoSecretSantaBundle:Participant participant
+            FROM Participant participant
               JOIN participant.party party
               JOIN participant.participant peer
             WHERE peer.wishlistUpdated = 1
@@ -135,7 +135,7 @@ class ParticipantMailQuery
 
         $query = $this->em->createQuery('
             SELECT participant
-            FROM IntractoSecretSantaBundle:Participant participant
+            FROM Participant participant
               JOIN participant.party party
             WHERE participant.partyAdmin = 1
               AND participant.url IS NOT NULL

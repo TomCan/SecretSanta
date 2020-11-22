@@ -14,7 +14,7 @@ class ContactController extends Controller
 {
     /**
      * @Route("/contact", name="contact")
-     * @Template("IntractoSecretSantaBundle:Static:contact.html.twig")
+     * @Template("Static/contact.html.twig")
      * @Method({"GET", "POST"})
      *
      * @param Request            $request

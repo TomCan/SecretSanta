@@ -16,7 +16,7 @@ class ParticipantController extends Controller
 {
     /**
      * @Route("/participant/edit/{listurl}/{participantUrl}", name="participant_edit")
-     * @ParamConverter("participant", class="IntractoSecretSantaBundle:Participant", options={"mapping": {"participantUrl": "url"}})
+     * @ParamConverter("participant", class="App\Entity\Participant", options={"mapping": {"participantUrl": "url"}})
      * @Method("POST")
      */
     public function editParticipantAction(Request $request, string $listurl, Participant $participant)
@@ -50,7 +50,7 @@ class ParticipantController extends Controller
 
     /**
      * @Route("/participant/remove/{listurl}/{participantUrl}", name="participant_remove")
-     * @ParamConverter("participant", class="IntractoSecretSantaBundle:Participant", options={"mapping": {"participantUrl": "url"}})
+     * @ParamConverter("participant", class="App\Entity\Participant", options={"mapping": {"participantUrl": "url"}})
      * @Method("POST")
      */
     public function removeParticipantFromPartyAction(Request $request, $listurl, Participant $participant)

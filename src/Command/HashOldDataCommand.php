@@ -55,7 +55,7 @@ class HashOldDataCommand extends Command
 
         $qb = $this->em->createQueryBuilder();
         $qb->select('p')
-           ->from('IntractoSecretSantaBundle:Participant', 'p')
+           ->from('Participant', 'p')
            ->where('p.id > :id')
            ->andWhere('p.isHashed = false')
            ->setParameter('id', $nextId)
@@ -95,7 +95,7 @@ class HashOldDataCommand extends Command
 
             $qb = $this->em->createQueryBuilder();
             $qb->select('p')
-               ->from('IntractoSecretSantaBundle:Participant', 'p')
+               ->from('Participant', 'p')
                ->where('p.id > :id')
                ->andWhere('p.isHashed = false')
                ->setParameter('id', $nextId)

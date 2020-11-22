@@ -22,7 +22,7 @@ class ParticipantRepository extends ServiceEntityRepository
     {
         $query = $this->_em->createQuery('
             SELECT participant
-            FROM IntractoSecretSantaBundle:Participant participant
+            FROM Participant participant
             JOIN participant.party party
             JOIN participant.assignedParticipant assignedParticipant
             WHERE party.sentdate >= :startDate
@@ -42,7 +42,7 @@ class ParticipantRepository extends ServiceEntityRepository
     {
         $query = $this->_em->createQuery('
             SELECT participant
-            FROM IntractoSecretSantaBundle:Participant participant
+            FROM Participant participant
             WHERE participant.email = :email
         ');
         $query->setParameter('email', $email);
@@ -61,7 +61,7 @@ class ParticipantRepository extends ServiceEntityRepository
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->addSelect('participant')
-            ->from('IntractoSecretSantaBundle:Participant', 'participant')
+            ->from('Participant', 'participant')
             ->join('participant.party', 'party')
             ->andWhere('participant.partyAdmin = false')
             ->andWhere('participant.email = :email')
@@ -87,7 +87,7 @@ class ParticipantRepository extends ServiceEntityRepository
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->addSelect('participant')
-            ->from('IntractoSecretSantaBundle:Participant', 'participant')
+            ->from('Participant', 'participant')
             ->join('participant.party', 'party')
             ->andWhere('participant.partyAdmin = true')
             ->andWhere('party.id = :partyId')
@@ -107,7 +107,7 @@ class ParticipantRepository extends ServiceEntityRepository
     {
         $query = $this->_em->createQuery('
             SELECT participant
-            FROM IntractoSecretSantaBundle:Participant participant
+            FROM Participant participant
             WHERE participant.geoCountry IS NULL
               AND (participant.ipv4 IS NOT NULL
                OR participant.ipv6 IS NOT NULL)

@@ -21,13 +21,13 @@ class ManagementController extends Controller
 {
     /**
      * @Route("/manage/{listurl}", name="party_manage")
-     * @Template("IntractoSecretSantaBundle:Party/manage:valid.html.twig")
+     * @Template("Party/manage:valid.html.twig")
      * @Method("GET")
      */
     public function validAction(Party $party, Form $excludeForm = null)
     {
         if ($party->getEventdate() < new \DateTime('-2 years')) {
-            return $this->render('IntractoSecretSantaBundle:Party/manage:expired.html.twig', [
+            return $this->render('Party/manage:expired.html.twig', [
                 'party' => $party,
                 'delete_party_csrf_token' => $this->get('security.csrf.token_manager')->getToken('delete_party'),
             ]);

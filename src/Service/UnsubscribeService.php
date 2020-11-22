@@ -46,7 +46,7 @@ class UnsubscribeService
     {
         if ($fromAllParties) {
             /** @var Participant[] $participants */
-            $participants = $this->em->getRepository('IntractoSecretSantaBundle:Participant')->findAllByEmail($participant->getEmail());
+            $participants = $this->em->getRepository(Participant::class)->findAllByEmail($participant->getEmail());
             foreach ($participants as $p) {
                 $p->unsubscribe();
                 $this->em->persist($participant);
@@ -87,7 +87,7 @@ class UnsubscribeService
     public function isBlacklisted(Participant $participant): bool
     {
         $hashedMail = $this->hashService->hashEmail($participant->getEmail());
-        $repository = $this->em->getRepository('IntractoSecretSantaBundle:BlacklistEmail');
+        $repository = $this->em->getRepository(BlacklistEmail::class);
         $results = $repository->createQueryBuilder('b')
             ->where('b.email = :email')
             ->setParameter('email', $hashedMail)
