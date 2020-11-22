@@ -1,4 +1,4 @@
-{% extends "Party/manage:base.html.twig" %}
+{% extends "Party/manage/base.html.twig" %}
 {% block datalayer %}
     <script>
         dataLayer.push({
@@ -313,7 +313,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ form_javascript(updatePartyDetailsForm) }}
+    {# form_javascript(updatePartyDetailsForm) #}
     <script src="{{ asset('/select2/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('build/js/party.manage.js') }}"></script>
     <script type="text/javascript">
