@@ -7,21 +7,21 @@ default:
 
     suites:
         secretsanta:
-            paths:    [ "%paths.base%/src/Intracto/Behat/Features" ]
+            paths:    [ "%paths.base%/src/Features" ]
             contexts:
                    - Behat\MinkExtension\Context\MinkContext
-                   - Intracto\Behat\Features\Context\FeatureContext
-                   - Intracto\Behat\Features\Context\EmailContext
-                   - Intracto\Behat\Features\Context\Bootstrap\PartyContext
-                   - Intracto\Behat\Features\Context\Bootstrap\LanguageContext
-                   - Intracto\Behat\Features\Context\Bootstrap\CommonPartyManagementContext
-                   - Intracto\Behat\Features\Context\Bootstrap\ParticipantContext
-                   - Intracto\Behat\Features\Context\Bootstrap\UnstartedPartyManagementContext
-                   - Intracto\Behat\Features\Context\Bootstrap\StartedPartyManagementContext
-                   - Intracto\Behat\Features\Context\Bootstrap\ReportContext
-                   - Intracto\Behat\Features\Context\Bootstrap\ResendPartyInfoContext
-                   - Intracto\Behat\Features\Context\Bootstrap\ReusePartyLinkContext
-                   - Intracto\Behat\Features\Context\Bootstrap\UnsubscribeContext
+                   - App\Features\Context\FeatureContext
+                   - App\Features\Context\EmailContext
+                   - App\Features\Context\Bootstrap\PartyContext
+                   - App\Features\Context\Bootstrap\LanguageContext
+                   - App\Features\Context\Bootstrap\CommonPartyManagementContext
+                   - App\Features\Context\Bootstrap\ParticipantContext
+                   - App\Features\Context\Bootstrap\UnstartedPartyManagementContext
+                   - App\Features\Context\Bootstrap\StartedPartyManagementContext
+                   - App\Features\Context\Bootstrap\ReportContext
+                   - App\Features\Context\Bootstrap\ResendPartyInfoContext
+                   - App\Features\Context\Bootstrap\ReusePartyLinkContext
+                   - App\Features\Context\Bootstrap\UnsubscribeContext
 
     extensions:
         Behat\MinkExtension:

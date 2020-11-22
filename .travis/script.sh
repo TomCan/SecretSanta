@@ -20,7 +20,7 @@ fi
 bin/console lint:yaml app/config || exit $?
 # this checks that the Twig template files contain no syntax errors
 bin/console lint:twig app/Resources/TwigBundle || exit $?
-bin/console lint:twig src/Intracto/SecretSantaBundle/Resources/views || exit $?
+bin/console lint:twig src/Resources/views || exit $?
 # this checks that the application doesn't use dependencies with known security vulnerabilities
 bin/console security:check || exit $?
 # this checks that the composer.json and composer.lock files are valid
