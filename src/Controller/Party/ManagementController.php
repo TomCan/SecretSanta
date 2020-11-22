@@ -21,7 +21,7 @@ class ManagementController extends Controller
 {
     /**
      * @Route("/manage/{listurl}", name="party_manage")
-     * @Template("Party/manage:valid.html.twig")
+     * @Template("Party/manage/valid.html.twig")
      * @Method("GET")
      */
     public function validAction(Party $party, Form $excludeForm = null)
