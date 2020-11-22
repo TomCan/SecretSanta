@@ -147,7 +147,7 @@
     {{ parent() }}
     <script type="text/javascript" src="{{ asset('build/js/party.create.js') }}"></script>
     <script type="text/javascript" src="{{ asset('build/js/party.import.js') }}"></script>
-    {{ form_javascript(form) }}
+    {# form_javascript(form) #}
     <script type="text/javascript">
         if (Modernizr.inputtypes.date == true) {
             // support for date input type, remove datepicker
