@@ -15,10 +15,10 @@ use Twig\Environment;
 
 class MailerService
 {
-    /** @var MailerInterface */
+    /** @var \Swift_Mailer */
     public $mailer;
 
-    /** @var MailerInterface */
+    /** @var \Swift_Mailer */
     public $mandrill;
 
     /** @var EntityManagerInterface */
@@ -45,8 +45,8 @@ class MailerService
     public $contactEmail;
 
     /**
-     * @param MailerInterface        $mailer                 a regular SMTP mailer, bad monitoring, cheap
-     * @param MailerInterface        $mandrill               mandrill SMTP mailer, good monitoring, expensive
+     * @param \Swift_Mailer        $mailer                 a regular SMTP mailer, bad monitoring, cheap
+     * @param \Swift_Mailer        $mandrill               mandrill SMTP mailer, good monitoring, expensive
      * @param EntityManagerInterface $em
      * @param Environment        $templating
      * @param TranslatorInterface    $translator
@@ -57,8 +57,8 @@ class MailerService
      * @param string                 $contactEmail
      */
     public function __construct(
-        MailerInterface $mailer,
-        MailerInterface $mandrill,
+        \Swift_Mailer $mailer,
+        \Swift_Mailer $mandrill,
         EntityManagerInterface $em,
         Environment $templating,
         TranslatorInterface $translator,
