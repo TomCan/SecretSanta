@@ -58,7 +58,7 @@
                     </tr>
                     </thead>
                     <tbody data-prototype="{% apply escape %}
-                    {% include 'IntractoSecretSantaBundle:Helpers:prototypeParticipant.html.twig' with
+                    {% include 'Helpers/prototypeParticipant.html.twig' with
                     {'participant': form.participants.vars['prototype']} %}{% endapply %}">
                     {% for participant in form.participants %}
                         <tr class="participant {% if participant.vars.data.partyAdmin %}owner

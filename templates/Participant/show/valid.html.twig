@@ -131,7 +131,7 @@
                 </th>
             </tr>
             </thead>
-            <tbody data-prototype="{% filter escape %}{% include 'IntractoSecretSantaBundle:Helpers:prototypeWishlist.html.twig' with {'item': wishlistForm.wishlistItems.vars['prototype']} %}{% endfilter %}">
+            <tbody data-prototype="{% filter escape %}{% include 'Helpers/prototypeWishlist.html.twig' with {'item': wishlistForm.wishlistItems.vars['prototype']} %}{% endfilter %}">
             {% if wishlistForm.wishlistItems |length == 0 %}
                 <tr class="noitems">
                     <td colspan="3">{{ 'participant_show_valid.wishlist.empty'|trans }}</td>
