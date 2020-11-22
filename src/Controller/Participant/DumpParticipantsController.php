@@ -14,7 +14,7 @@ class DumpParticipantsController extends AbstractController
 {
     /**
      * @Route("/dump-participants", name="dump_participants")
-     * @Template("IntractoSecretSantaBundle:Participant:dumpParticipants.html.twig")
+     * @Template("Participant/dumpParticipants.html.twig")
      * @Method("GET")
      */
     public function dumpAction(ParticipantRepository $repository)

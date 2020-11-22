@@ -93,13 +93,13 @@ class MailerService
             ->setTo($party->getOwnerEmail())
             ->setBody(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:pendingConfirmation.txt.twig',
+                    'Emails/pendingConfirmation.txt.twig',
                     ['party' => $party]
                 )
             )
             ->addPart(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:pendingConfirmation.html.twig',
+                    'Emails/pendingConfirmation.html.twig',
                     ['party' => $party]
                 ),
                 'text/html'
@@ -168,7 +168,7 @@ class MailerService
             ->setTo($participant->getEmail(), $participant->getName())
             ->setBody(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:participant.html.twig',
+                    'Emails/participant.html.twig',
                     [
                         'message' => $message,
                         'participant' => $participant,
@@ -178,7 +178,7 @@ class MailerService
             )
             ->addPart(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:participant.txt.twig',
+                    'Emails/participant.txt.twig',
                     [
                         'message' => $message,
                         'participant' => $participant,
@@ -244,7 +244,7 @@ class MailerService
             ->setTo($email)
             ->setBody(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:forgotLink.html.twig',
+                    'Emails/forgotLink.html.twig',
                     [
                         'manageLinks' => $manageLinks,
                         'participantLinks' => $participantLinks,
@@ -254,7 +254,7 @@ class MailerService
             )
             ->addPart(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:forgotLink.txt.twig',
+                    'Emails/forgotLink.txt.twig',
                     [
                         'manageLinks' => $manageLinks,
                         'participantLinks' => $participantLinks,
@@ -301,7 +301,7 @@ class MailerService
             ->setTo($email)
             ->setBody(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:reuseLink.html.twig',
+                    'Emails/reuseLink.html.twig',
                     [
                         'partyLinks' => $partyLinks,
                     ]
@@ -310,7 +310,7 @@ class MailerService
             )
             ->addPart(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:reuseLink.txt.twig',
+                    'Emails/reuseLink.txt.twig',
                     [
                         'partyLinks' => $partyLinks,
                     ]
@@ -348,7 +348,7 @@ class MailerService
             ->setTo($participant->getEmail(), $participant->getName())
             ->setBody(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:partyUpdate.html.twig',
+                    'Emails/partyUpdate.html.twig',
                     [
                         'participant' => $participant,
                         'results' => $results,
@@ -358,7 +358,7 @@ class MailerService
             )
             ->addPart(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:partyUpdate.txt.twig',
+                    'Emails/partyUpdate.txt.twig',
                     [
                         'participant' => $participant,
                         'results' => $results,
@@ -384,7 +384,7 @@ class MailerService
             ->setTo($this->contactEmail)
             ->setBody(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:contact.html.twig',
+                    'Emails/contact.html.twig',
                     [
                         'submission' => $contactSubmission,
                     ]
@@ -393,7 +393,7 @@ class MailerService
             )
             ->addPart(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:contact.txt.twig',
+                    'Emails/contact.txt.twig',
                     [
                         'submission' => $contactSubmission,
                     ]
@@ -417,7 +417,7 @@ class MailerService
             ->setTo($participant->getEmail(), $participant->getName())
             ->setBody(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:emptyWishlistReminder.html.twig',
+                    'Emails/emptyWishlistReminder.html.twig',
                     [
                         'participant' => $participant,
                     ]
@@ -426,7 +426,7 @@ class MailerService
             )
             ->addPart(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:emptyWishlistReminder.txt.twig',
+                    'Emails/emptyWishlistReminder.txt.twig',
                     [
                         'participant' => $participant,
                     ]
@@ -449,7 +449,7 @@ class MailerService
             ->setTo($participant->getEmail(), $participant->getName())
             ->setBody(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:viewParticipantReminder.html.twig',
+                    'Emails/viewParticipantReminder.html.twig',
                     [
                         'participant' => $participant,
                     ]
@@ -458,7 +458,7 @@ class MailerService
             )
             ->addPart(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:viewParticipantReminder.txt.twig',
+                    'Emails/viewParticipantReminder.txt.twig',
                     [
                         'participant' => $participant,
                     ]
@@ -481,7 +481,7 @@ class MailerService
             ->setTo($participant->getEmail(), $participant->getName())
             ->setBody(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:wishlistChanged.html.twig',
+                    'Emails/wishlistChanged.html.twig',
                     [
                         'participant' => $participant,
                     ]
@@ -490,7 +490,7 @@ class MailerService
             )
             ->addPart(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:wishlistChanged.txt.twig',
+                    'Emails/wishlistChanged.txt.twig',
                     [
                         'participant' => $participant,
                     ]
@@ -513,7 +513,7 @@ class MailerService
             ->setTo($participant->getEmail(), $participant->getName())
             ->setBody(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:partyStatus.html.twig',
+                    'Emails/partyStatus.html.twig',
                     [
                         'party' => $participant->getParty(),
                     ]
@@ -522,7 +522,7 @@ class MailerService
             )
             ->addPart(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:partyStatus.txt.twig',
+                    'Emails/partyStatus.txt.twig',
                     [
                         'party' => $participant->getParty(),
                         'admin' => $participant,
@@ -558,7 +558,7 @@ class MailerService
             ->setTo($participant->getEmail(), $participant->getName())
             ->setBody(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:updatedParty.html.twig',
+                    'Emails/updatedParty.html.twig',
                     [
                         'participant' => $participant,
                     ]
@@ -567,7 +567,7 @@ class MailerService
             )
             ->addPart(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:updatedParty.txt.twig',
+                    'Emails/updatedParty.txt.twig',
                     [
                         'participant' => $participant,
                     ]
@@ -587,7 +587,7 @@ class MailerService
             ->setTo($participant->getEmail(), $participant->getName())
             ->setBody(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:removedSecretSanta.html.twig',
+                    'Emails/removedSecretSanta.html.twig',
                     [
                         'participant' => $participant,
                     ]
@@ -596,7 +596,7 @@ class MailerService
             )
             ->addPart(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:removedSecretSanta.txt.twig',
+                    'Emails/removedSecretSanta.txt.twig',
                     [
                         'participant' => $participant,
                     ]
@@ -621,7 +621,7 @@ class MailerService
             ->setTo($recipient->getEmail())
             ->setBody(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:anonymousMessage.html.twig',
+                    'Emails/anonymousMessage.html.twig',
                     [
                         'message' => $message,
                         'participant' => $recipient,
@@ -631,7 +631,7 @@ class MailerService
             )
             ->addPart(
                 $this->templating->render(
-                    'IntractoSecretSantaBundle:Emails:anonymousMessage.txt.twig',
+                    'Emails/anonymousMessage.txt.twig',
                     [
                         'message' => $message,
                         'participant' => $recipient,

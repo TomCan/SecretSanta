@@ -17,7 +17,7 @@ class UnsubscribeController extends AbstractController
 {
     /**
      * @Route("/unsubscribe/{url}", name="unsubscribe_confirm")
-     * @Template("IntractoSecretSantaBundle:Participant:unsubscribe.html.twig")
+     * @Template("Participant/unsubscribe.html.twig")
      * @Method({"GET", "POST"})
      */
     public function confirmAction(Request $request, Participant $participant, UnsubscribeFormHandler $handler)

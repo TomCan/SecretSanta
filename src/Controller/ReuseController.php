@@ -16,7 +16,7 @@ class ReuseController extends AbstractController
 {
     /**
      * @Route("/reuse", name="request_reuse_url")
-     * @Template("IntractoSecretSantaBundle:Party:getReuseUrl.html.twig")
+     * @Template("Party/getReuseUrl.html.twig")
      * @Method({"GET", "POST"})
      */
     public function showRequestAction(Request $request, ReuseFormHandler $handler)

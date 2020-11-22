@@ -15,7 +15,7 @@ class HomepageController extends AbstractController
 {
     /**
      * @Route("/", name="homepage")
-     * @Template("IntractoSecretSantaBundle:Party:create.html.twig")
+     * @Template("Party/create.html.twig")
      * @Method("GET")
      */
     public function indexAction()

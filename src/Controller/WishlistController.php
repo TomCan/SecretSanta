@@ -19,7 +19,7 @@ class WishlistController extends AbstractController
 {
     /**
      * @Route("/wishlists/show/{wishlistsurl}", name="wishlist_show_all")
-     * @Template("IntractoSecretSantaBundle:Wishlist:showAll.html.twig")
+     * @Template("Wishlist/showAll.html.twig")
      * @Method("GET")
      */
     public function showAllAction(Request $request, Party $party): array

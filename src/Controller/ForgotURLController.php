@@ -16,7 +16,7 @@ class ForgotURLController extends AbstractController
 {
     /**
      * @Route("/forgot-link", name="forgot_url")
-     * @Template("IntractoSecretSantaBundle:Party:forgotLink.html.twig")
+     * @Template("Party/forgotLink.html.twig")
      * @Method({"GET", "POST"})
      */
     public function indexAction(Request $request, ForgotUrlFormHandler $handler)

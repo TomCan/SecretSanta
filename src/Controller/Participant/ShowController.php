@@ -18,13 +18,13 @@ class ShowController extends AbstractController
 {
     /**
      * @Route("/participant/{url}", name="participant_view")
-     * @Template("IntractoSecretSantaBundle:Participant/show:valid.html.twig")
+     * @Template("Participant/show/valid.html.twig")
      * @Method("GET")
      */
     public function showAction(Request $request, Participant $participant, ParticipantService $participantService)
     {
         if ($participant->getParty()->getEventdate() < new \DateTime('-2 years')) {
-            return $this->render('IntractoSecretSantaBundle:Participant/show:expired.html.twig', [
+            return $this->render('Participant/show/expired.html.twig', [
                 'participant' => $participant,
             ]);
         }

@@ -1,4 +1,4 @@
-{% extends "IntractoSecretSantaBundle::base.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block main %}
     <div class="intro row align-items-center">
@@ -140,7 +140,7 @@
             {% endif %}
         </div>
 
-        {% include 'IntractoSecretSantaBundle:Party:createCopy.html.twig' %}
+        {% include 'Party/createCopy.html.twig' %}
     </div>
 {% endblock %}
 {% block javascripts %}
