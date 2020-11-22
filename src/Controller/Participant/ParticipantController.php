@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Participant;
 
+use App\Mailer\MailerService;
+use App\Repository\ParticipantRepository;
+use App\Service\ParticipantService;
+use App\Service\ReportQueriesService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -19,7 +23,7 @@ class ParticipantController extends Controller
      * @ParamConverter("participant", class="App\Entity\Participant", options={"mapping": {"participantUrl": "url"}})
      * @Method("POST")
      */
-    public function editParticipantAction(Request $request, string $listurl, Participant $participant)
+    public function editParticipantAction(Request $request, string $listurl, Participant $participant, ParticipantService $participantService, MailerService $mailerService)
     {
         $name = htmlspecialchars($request->request->get('name'), ENT_QUOTES);
         $email = htmlspecialchars($request->request->get('email'), ENT_QUOTES);
@@ -32,16 +36,16 @@ class ParticipantController extends Controller
             throw $this->createNotFoundException('Participant not found');
         }
 
-        if (!$this->get('intracto_secret_santa.service.participant')->validateEmail($email)) {
+        if (!$participantService->validateEmail($email)) {
             return new JsonResponse(['success' => false, 'message' => $this->get('translator')->trans('flashes.participant.edit_email')]);
         }
 
         $originalEmail = $participant->getEmail();
-        $this->get('intracto_secret_santa.service.participant')->editParticipant($participant, $name, $email);
+        $participantService->editParticipant($participant, $name, $email);
 
         $message = $this->get('translator')->trans('flashes.participant.updated_participant');
         if ($originalEmail !== $participant->getEmail() && $participant->getParty()->getCreated()) {
-            $this->get('intracto_secret_santa.mailer')->sendSecretSantaMailForParticipant($participant);
+            $mailerService->sendSecretSantaMailForParticipant($participant);
             $message = $this->get('translator')->trans('flashes.participant.updated_participant_resent');
         }
 
@@ -53,7 +57,7 @@ class ParticipantController extends Controller
      * @ParamConverter("participant", class="App\Entity\Participant", options={"mapping": {"participantUrl": "url"}})
      * @Method("POST")
      */
-    public function removeParticipantFromPartyAction(Request $request, $listurl, Participant $participant)
+    public function removeParticipantFromPartyAction(Request $request, $listurl, Participant $participant, ParticipantRepository $participantRepository, ReportQueriesService $reportQueriesService, MailerService $mailerService)
     {
         if (false === $this->isCsrfTokenValid('delete_participant', $request->get('csrf_token'))) {
             $this->addFlash('danger', $this->get('translator')->trans('flashes.participant.remove_participant.wrong'));
@@ -103,8 +107,8 @@ class ParticipantController extends Controller
 
         if ($participant->getParty()->getCreated()) {
             $secretSanta = $participant->getAssignedParticipant();
-            $assignedParticipantId = $this->get('intracto_secret_santa.query.participant_report')->findBuddyByParticipantId($participant->getId());
-            $assignedParticipant = $this->get('intracto_secret_santa.repository.participant')->find($assignedParticipantId[0]['id']);
+            $assignedParticipantId = $reportQueriesService->findBuddyByParticipantId($participant->getId());
+            $assignedParticipant = $participantRepository->find($assignedParticipantId[0]['id']);
 
             // if A -> B -> A we can't delete B anymore or A is assigned to A
             if ($participant->getAssignedParticipant()->getAssignedParticipant()->getId() === $participant->getId()) {
@@ -121,7 +125,7 @@ class ParticipantController extends Controller
             $em->flush();
 
             if ($assignedParticipant->isSubscribed()) {
-                $this->get('intracto_secret_santa.mailer')->sendRemovedSecretSantaMail($assignedParticipant);
+                $mailerService->sendRemovedSecretSantaMail($assignedParticipant);
             }
         } else {
             $em->remove($participant);

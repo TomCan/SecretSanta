@@ -6,6 +6,8 @@ namespace App\Controller\Party;
 
 use App\Entity\Party;
 use App\Form\Handler\AddParticipantFormHandler;
+use App\Mailer\MailerService;
+use App\Service\PartyService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -60,7 +62,7 @@ class ManagementController extends Controller
      * @Route("/manage/update/{listurl}", name="party_manage_update")
      * @Method("POST")
      */
-    public function updateAction(Request $request, Party $party)
+    public function updateAction(Request $request, Party $party, MailerService $mailerService)
     {
         $party->setConfirmed(true);
         $updatePartyDetailsForm = $this->createForm(UpdatePartyDetailsType::class, $party, ['validation_groups' => 'Party']);
@@ -71,7 +73,7 @@ class ManagementController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             if ($party->getCreated()) {
-                $this->get('intracto_secret_santa.mailer')->sendPartyUpdatedMailsForParty($party);
+                $mailerService->sendPartyUpdatedMailsForParty($party);
             }
 
             $this->addFlash('success', $this->get('translator')->trans('flashes.management.updated_party.success'));
@@ -99,9 +101,9 @@ class ManagementController extends Controller
      * @Route("/manage/start/{listurl}", name="party_manage_start")
      * @Method("GET")
      */
-    public function startPartyAction(Party $party)
+    public function startPartyAction(Party $party, PartyService $partyService)
     {
-        if ($this->get('intracto_secret_santa.service.party')->startParty($party)) {
+        if ($partyService->startParty($party)) {
             $this->addFlash('success', $this->get('translator')->trans('flashes.management.start_party.success'));
         } else {
             $this->addFlash('danger', $this->get('translator')->trans('flashes.management.start_party.danger'));
