@@ -3,7 +3,7 @@ var Encore = require('@symfony/webpack-encore');
 var path = require('path');
 
 Encore
-    .setOutputPath('web/build/')
+    .setOutputPath('public/build/')
     .setPublicPath('/build')
 
     .cleanupOutputBeforeBuild()
