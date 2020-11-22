@@ -54,3 +54,6 @@ services:
     Symfony\Component\Form\FormRendererInterface:
         alias: 'twig.form.renderer'
         public: true
+
+    Twig\Extensions\TextExtension: ~
+    Twig\Extensions\IntlExtension: ~
