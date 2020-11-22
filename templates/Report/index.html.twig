@@ -23,8 +23,8 @@
                 <p>There are no data available for this season.</p>
             </div>
         {% else %}
-            {% include 'IntractoSecretSantaBundle:Report:result.html.twig' %}
-            {% include 'IntractoSecretSantaBundle:Report:analytics.html.twig' %}
+            {% include 'Report/result.html.twig' %}
+            {% include 'Report/analytics.html.twig' %}
 
             <div class="clearfix"></div>
         {% endif %}
@@ -32,5 +32,5 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    {% include 'IntractoSecretSantaBundle:Report:javascripts.html.twig' %}
+    {% include 'Report/javascripts.html.twig' %}
 {% endblock %}
