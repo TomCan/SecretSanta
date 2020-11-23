@@ -57,3 +57,7 @@ services:
 
     Twig\Extensions\TextExtension: ~
     Twig\Extensions\IntlExtension: ~
+
+    App\EventListener\RequestLocaleListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, priority: 512 }
