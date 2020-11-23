@@ -12,7 +12,7 @@
     {% block metadata %}{% endblock %}
     <title>{% block title %}{{ 'base.meta.title'|trans }}{% endblock %}</title>
 
-    {% for supported_locale in supported_locales %}
+    {% for supported_locale in supported_locales|split(",") %}
         {% if app.request.get('_route_params') is not null and supported_locale != app.request.get('_locale') %}
             <link rel="alternate" hreflang="{{ supported_locale }}"
                   href="{{ url(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': supported_locale})) }}"/>
@@ -75,10 +75,10 @@
         <div class="header__right">
             <div class="lang__selection">
                 <select>
-                    {% for supported_locale in supported_locales %}
+                    {% for key, supported_locale in supported_locales|split(",") %}
                         {% if app.request.get('_route_params') is not null %}
                             <option value="{{ url(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': supported_locale})) }}"{% if supported_locale == app.request.get('_locale') %} selected{% endif %}>
-                                {{ locale_names[supported_locale|replace({'-': '_'})] }}
+                                {{ locale_names|split(",")[key] }}
                             </option>
                         {% endif %}
                     {% endfor %}
@@ -110,10 +110,10 @@
             <div class="visible-xs-*">
                 <div class="select-secret-santa mobile__lang__selection pl-3 pr-3">
                     <select>
-                        {% for supported_locale in supported_locales %}
+                        {% for key, supported_locale in supported_locales|split(",") %}
                             {% if app.request.get('_route_params') is not null %}
                                 <option value="{{ url(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': supported_locale})) }}"{% if supported_locale == app.request.get('_locale') %} selected{% endif %}>
-                                    {{ locale_names[supported_locale|replace({'-': '_'})] }}
+                                    {{ locale_names|split(",")[key] }}
                                 </option>
                             {% endif %}
                         {% endfor %}
