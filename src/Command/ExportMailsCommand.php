@@ -11,14 +11,8 @@ use App\Query\Season;
 
 class ExportMailsCommand extends Command
 {
-    /**
-     * @var ExportService
-     */
-    private $exportService;
+    private ExportService $exportService;
 
-    /**
-     * @param ExportService $exportService
-     */
     public function __construct(ExportService $exportService)
     {
         parent::__construct();
@@ -66,5 +60,7 @@ class ExportMailsCommand extends Command
 
                 break;
         }
+
+        return 0;
     }
 }

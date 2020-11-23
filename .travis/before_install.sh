@@ -11,6 +11,7 @@ echo "extension = memcached" >> ~/.phpenv/versions/$(phpenv version-name)/etc/co
 
 git clone https://github.com/xdebug/xdebug
 cd xdebug
+git checkout origin/xdebug_2_9 -b 2.9
 phpize
 ./configure
 make
@@ -22,11 +23,9 @@ EOF
 
 mkdir -p \"${BUILD_CACHE_DIR}\" || exit $? # Create build cache directory
 
-# Download and configure geoip db
+# Download and configure geoip db (if you know where to download this in a proper way, please let me know)
 if [ ! -f $BUILD_CACHE_DIR/GeoLite2-City.mmdb ]; then
-    curl http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz > geolite.tar.gz
-    tar -xvzf geolite.tar.gz --strip=1
-
+    curl https://www.secretsantaorganizer.com/GeoLite2-City.mmdb > GeoLite2-City.mmdb
     mv GeoLite2-City.mmdb $BUILD_CACHE_DIR
 fi
 

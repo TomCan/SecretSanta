@@ -23,9 +23,11 @@ DEPENDENCIES=(
     yarn
     mailhog
     rsyslogd
+    geoip
 )
 
 for MODULE in ${DEPENDENCIES[@]}; do
     source ${MODULE_PATH}/${MODULE}.sh
 done
 
+echo "cd /vagrant" >> /home/vagrant/.profile

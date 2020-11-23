@@ -10,16 +10,9 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class ParticipantIsNotBlacklistedValidator extends ConstraintValidator
 {
-    private $em;
+    private EntityManagerInterface $em;
+    private HashService $hashService;
 
-    private $hashService;
-
-    /**
-     * ParticipantIsNotBlacklistedValidator constructor.
-     *
-     * @param EntityManagerInterface $em
-     * @param HashService            $hashService
-     */
     public function __construct(
         EntityManagerInterface $em,
         HashService $hashService
@@ -29,8 +22,7 @@ class ParticipantIsNotBlacklistedValidator extends ConstraintValidator
     }
 
     /**
-     * @param string     $email
-     * @param Constraint $constraint
+     * @param string $email
      */
     public function validate($email, Constraint $constraint)
     {

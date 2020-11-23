@@ -4,13 +4,8 @@ namespace App\Service;
 
 class HashService
 {
-    private $salt;
+    private string $salt;
 
-    /**
-     * HashService constructor.
-     *
-     * @param string $salt
-     */
     public function __construct(
         string $salt
     ) {

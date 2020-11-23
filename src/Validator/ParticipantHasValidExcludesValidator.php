@@ -10,7 +10,6 @@ class ParticipantHasValidExcludesValidator extends ConstraintValidator
 {
     /**
      * @param Participant $participant
-     * @param Constraint  $constraint
      */
     public function validate($participant, Constraint $constraint)
     {

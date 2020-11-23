@@ -16,17 +16,17 @@ class PartyContext extends RawMinkContext
         $i = 0;
         $participants = [];
         while ($i < $memberCount) {
-            $participants[] = ['name' => 'test'.$i, 'email' => 'test'.$i.'@test.com'];
+            $participants[] = ['name' => 'test'.$i, 'email' => 'test'.$i.'@example.com'];
 
             ++$i;
         }
 
         if (count($participants) > 3) {
-            //We need to add extra lines to the participant form
+            // We need to add extra lines to the participant form
             $extraLineCount = count($participants) - 3;
 
             while ($extraLineCount > 0) {
-                $this->getSession()->getPage()->find('css', '.add-btn-create.add-new-participant')->click();
+                $this->getSession()->getPage()->find('css', 'button.add-new-participant')->click();
 
                 --$extraLineCount;
             }
@@ -101,7 +101,7 @@ class PartyContext extends RawMinkContext
      */
     public function confirmationPage()
     {
-        $element = $this->getSession()->getPage()->find('css', '.box > h1');
+        $element = $this->getSession()->getPage()->find('css', 'div.box > h1');
 
         Assert::eq($element->getText(), 'Only 1 step to go! - Validate your participation', 'The confirmaton text could not be found on the page');
     }
@@ -118,7 +118,7 @@ class PartyContext extends RawMinkContext
         $i = 0;
         $csvData = "Name,Mailaddress\r\n";
         while ($participantCount > 0) {
-            $csvData .= "test{$i},test{$i}@test.com\r\n";
+            $csvData .= "test{$i},test{$i}@example.com\r\n";
             ++$i;
             --$participantCount;
         }

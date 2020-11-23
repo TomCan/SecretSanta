@@ -24,8 +24,7 @@ class Party
      */
     private $wishlistsurl;
 
-    /** @var string */
-    private $message;
+    private ?string $message = '';
 
     /** @var \DateTime */
     private $creationdate;
@@ -80,6 +79,8 @@ class Party
         $this->listurl = base_convert(sha1(uniqid((string) mt_rand(), true)), 16, 36);
         $this->wishlistsurl = base_convert(sha1(uniqid((string) mt_rand(), true)), 16, 36);
         $this->creationdate = new \DateTime();
+        $this->message = '';
+        $this->location = '';
     }
 
     /**
@@ -90,88 +91,57 @@ class Party
         return $this->id;
     }
 
-    /**
-     * @param string $listurl
-     *
-     * @return Party
-     */
-    public function setListurl($listurl)
+    public function setListurl(string $listurl): Party
     {
         $this->listurl = $listurl;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getListurl()
+    public function getListurl(): string
     {
         return $this->listurl;
     }
 
-    /**
-     * @param string $wishlistsurl
-     *
-     * @return Party
-     */
-    public function setWishlistsurl($wishlistsurl)
+    public function setWishlistsurl(string $wishlistsurl): Party
     {
         $this->wishlistsurl = $wishlistsurl;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getWishlistsurl()
+    public function getWishlistsurl(): string
     {
         return $this->wishlistsurl;
     }
 
-    /**
-     * @param string $message
-     *
-     * @return Party
-     */
-    public function setMessage($message)
+    public function setMessage(?string $message): Party
     {
+        if (null === $message) {
+            $message = '';
+        }
+
         $this->message = $message;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getMessage()
+    public function getMessage(): string
     {
-        return $this->message;
+        return (string) $this->message;
     }
 
-    /**
-     * @return string
-     */
-    public function getOwnerName()
+    public function getOwnerName(): string
     {
         return $this->participants->first()->getName();
     }
 
-    /**
-     * @return string
-     */
-    public function getOwnerEmail()
+    public function getOwnerEmail(): string
     {
         return $this->participants->first()->getEmail();
     }
 
-    /**
-     * @param \DateTime $creationdate
-     *
-     * @return Party
-     */
-    public function setCreationDate(\DateTime $creationdate)
+    public function setCreationDate(\DateTime $creationdate): Party
     {
         $this->creationdate = $creationdate;
 
@@ -186,12 +156,7 @@ class Party
         return $this->creationdate;
     }
 
-    /**
-     * @param \DateTime $sentdate
-     *
-     * @return Party
-     */
-    public function setSentdate($sentdate)
+    public function setSentdate(\DateTime $sentdate): Party
     {
         $this->sentdate = $sentdate;
 
@@ -206,21 +171,13 @@ class Party
         return $this->sentdate;
     }
 
-    /**
-     * @param Participant $participant
-     *
-     * @return Party
-     */
-    public function addParticipant(Participant $participant)
+    public function addParticipant(Participant $participant): Party
     {
         $this->participants[] = $participant;
 
         return $this;
     }
 
-    /**
-     * @param Participant $participant
-     */
     public function removeParticipant(Participant $participant)
     {
         $this->participants->removeElement($participant);
@@ -299,53 +256,37 @@ class Party
         return $this->created;
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return Party
-     */
-    public function setLocale($locale)
+    public function setLocale(string $locale): Party
     {
         $this->locale = $locale;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getLocale()
+    public function getLocale(): string
     {
         return $this->locale;
     }
 
-    /**
-     * @return string
-     */
-    public function getLocation()
+    public function getLocation(): string
     {
         return $this->location;
     }
 
-    /**
-     * @param string $location
-     */
-    public function setLocation($location)
+    public function setLocation(?string $location)
     {
+        if (null === $location) {
+            $location = '';
+        }
+
         $this->location = $location;
     }
 
-    /**
-     * @return bool
-     */
-    public function getConfirmed()
+    public function getConfirmed(): bool
     {
         return (bool) $this->confirmed;
     }
 
-    /**
-     * @param bool $confirmed
-     */
     public function setConfirmed(bool $confirmed)
     {
         $this->confirmed = (string) $confirmed;
@@ -397,7 +338,7 @@ class Party
 
         $this->addEmptyParticipants($party, $countParticipants);
 
-        return[$party, $countHashed];
+        return [$party, $countHashed];
     }
 
     /**

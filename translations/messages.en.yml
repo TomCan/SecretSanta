@@ -62,6 +62,12 @@ party-create:
             To keep things interesting though, you can <strong>randomly assign persons to each other</strong> to give a
             present to one another.</p>
 
+        title_2: How does it work?
+        intro_2: >
+            <p>Create a party <a href="https://www.secretsantaorganizer.com" target="_blank" rel="noopener noreferrer">on the homepage</a>. You need at least 3 participants, <b>the first participant being the list administrator.</b>
+            The list administrator will receive a confirmation link by e-mail. Once validated, your Secret Santa list will be scrambled and all users will receive your message along with the name of their Secret Santa gift buddy.
+            We demand a confirmation to prevent bots or trolls from ruining your Secret Santa party. <b>The validation e-mail will provide a link to the Secret Santa event manager</b>.</p>
+
     add_participants: Add your participants
     list_adminstrator: This person is a participant too.
     add_personal_message:
@@ -382,6 +388,13 @@ party_manage_valid:
                 By filling in the form below, a new participant will be added to your party.<br>
                 <br>
                 The new participant will immediately be assigned to a Secret Santa buddy and will receive an invitation by mail.<br>
+            </p>
+        started_warning: >
+            <p>
+                <strong>Warning: The participants have already been matched!</strong>
+                <br>
+                If there are still participants that have not yet seen their match, we will use one of them to match to the new participant.
+                If everyone has already seen their match, the new participant will be assigned to you and he/she will be assigned your match.
             </p>
 
     remove_participant:

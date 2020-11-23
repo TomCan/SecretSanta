@@ -15,47 +15,17 @@ use Twig\Environment;
 
 class MailerService
 {
-    /** @var \Swift_Mailer */
-    public $mailer;
+    public \Swift_Mailer $mailer;
+    public \Swift_Mailer $mandrill;
+    public EntityManagerInterface $em;
+    public EngineInterface $templating;
+    public TranslatorInterface $translator;
+    public RouterInterface $routing;
+    public UnsubscribeService $unsubscribeService;
+    public string $noreplyEmail;
+    private CheckMailDomainService $checkMailDomainService;
+    public string $contactEmail;
 
-    /** @var \Swift_Mailer */
-    public $mandrill;
-
-    /** @var EntityManagerInterface */
-    public $em;
-
-    /** @var Environment */
-    public $templating;
-
-    /** @var TranslatorInterface */
-    public $translator;
-
-    /** @var \Symfony\Bundle\FrameworkBundle\Routing\Router */
-    public $routing;
-
-    /** @var UnsubscribeService */
-    public $unsubscribeService;
-
-    public $noreplyEmail;
-
-    /** @var CheckMailDomainService */
-    private $checkMailDomainService;
-
-    /** @var string $contactEmail */
-    public $contactEmail;
-
-    /**
-     * @param \Swift_Mailer        $mailer                 a regular SMTP mailer, bad monitoring, cheap
-     * @param \Swift_Mailer        $mandrill               mandrill SMTP mailer, good monitoring, expensive
-     * @param EntityManagerInterface $em
-     * @param Environment        $templating
-     * @param TranslatorInterface    $translator
-     * @param RouterInterface        $routing
-     * @param UnsubscribeService     $unsubscribeService
-     * @param string                 $noreplyEmail
-     * @param CheckMailDomainService $checkMailDomainService
-     * @param string                 $contactEmail
-     */
     public function __construct(
         \Swift_Mailer $mailer,
         \Swift_Mailer $mandrill,
@@ -64,9 +34,9 @@ class MailerService
         TranslatorInterface $translator,
         RouterInterface $routing,
         UnsubscribeService $unsubscribeService,
-        $noreplyEmail,
+        string $noreplyEmail,
         CheckMailDomainService $checkMailDomainService,
-        $contactEmail
+        string $contactEmail
     ) {
         $this->mailer = $mailer;
         $this->mandrill = $mandrill;
@@ -80,9 +50,6 @@ class MailerService
         $this->contactEmail = $contactEmail;
     }
 
-    /**
-     * @param Party $party
-     */
     public function sendPendingConfirmationMail(Party $party): void
     {
         $this->translator->setLocale($party->getLocale());
@@ -109,8 +76,6 @@ class MailerService
 
     /**
      * Sends out all mails for a Party.
-     *
-     * @param Party $party
      */
     public function sendSecretSantaMailsForParty(Party $party): void
     {
@@ -125,8 +90,6 @@ class MailerService
 
     /**
      * Sends out mail for a Participant.
-     *
-     * @param Participant $participant
      */
     public function sendSecretSantaMailForParticipant(Participant $participant): void
     {
@@ -190,11 +153,6 @@ class MailerService
         $this->sendMail($mail);
     }
 
-    /**
-     * @param string $email
-     *
-     * @return bool
-     */
     public function sendForgotLinkMail(string $email): bool
     {
         /** @var Participant[] $participatingIn */
@@ -267,11 +225,6 @@ class MailerService
         return true;
     }
 
-    /**
-     * @param string $email
-     *
-     * @return bool
-     */
     public function sendReuseLinksMail(string $email): bool
     {
         $results = $this->em->getRepository(Party::class)->findPartiesToReuse($email);
@@ -322,10 +275,6 @@ class MailerService
         return true;
     }
 
-    /**
-     * @param Party $party
-     * @param array $results
-     */
     public function sendPartyUpdateMailForParty(Party $party, array $results): void
     {
         foreach ($party->getParticipants() as $participant) {
@@ -335,10 +284,6 @@ class MailerService
         }
     }
 
-    /**
-     * @param Participant $participant
-     * @param array       $results
-     */
     public function sendPartyUpdateMailForParticipant(Participant $participant, array $results): void
     {
         $this->translator->setLocale($participant->getParty()->getLocale());
@@ -370,12 +315,7 @@ class MailerService
         $this->sendMail($mail);
     }
 
-    /**
-     * @param ContactSubmission $contactSubmission
-     *
-     * @return bool
-     */
-    public function sendContactFormEmail(ContactSubmission $contactSubmission)
+    public function sendContactFormEmail(ContactSubmission $contactSubmission): bool
     {
         $this->translator->setLocale('nl');
         $mail = (new \Swift_Message())
@@ -405,9 +345,6 @@ class MailerService
         return true;
     }
 
-    /**
-     * @param Participant $participant
-     */
     public function sendWishlistReminderMail(Participant $participant): void
     {
         $this->translator->setLocale($participant->getParty()->getLocale());
@@ -437,9 +374,6 @@ class MailerService
         $this->mailer->send($mail);
     }
 
-    /**
-     * @param Participant $participant
-     */
     public function sendParticipantViewReminderMail(Participant $participant): void
     {
         $this->translator->setLocale($participant->getParty()->getLocale());
@@ -469,9 +403,6 @@ class MailerService
         $this->mailer->send($mail);
     }
 
-    /**
-     * @param Participant $participant
-     */
     public function sendWishlistUpdatedMail(Participant $participant): void
     {
         $this->translator->setLocale($participant->getParty()->getLocale());
@@ -501,9 +432,6 @@ class MailerService
         $this->mailer->send($mail);
     }
 
-    /**
-     * @param Participant $participant
-     */
     public function sendPartyStatusMail(Participant $participant): void
     {
         $this->translator->setLocale($participant->getParty()->getLocale());
@@ -534,9 +462,6 @@ class MailerService
         $this->mailer->send($mail);
     }
 
-    /**
-     * @param Party $party
-     */
     public function sendPartyUpdatedMailsForParty(Party $party): void
     {
         foreach ($party->getParticipants() as $participant) {
@@ -546,9 +471,6 @@ class MailerService
         }
     }
 
-    /**
-     * @param Participant $participant
-     */
     public function sendPartyUpdatedMailForParticipant(Participant $participant): void
     {
         $this->translator->setLocale($participant->getParty()->getLocale());
@@ -607,10 +529,6 @@ class MailerService
         $this->sendMail($mail);
     }
 
-    /**
-     * @param Participant $recipient
-     * @param string      $message
-     */
     public function sendAnonymousMessage(Participant $recipient, string $message): void
     {
         $this->translator->setLocale($recipient->getParty()->getLocale());

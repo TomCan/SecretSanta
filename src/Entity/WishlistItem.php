@@ -4,99 +4,49 @@ namespace App\Entity;
 
 class WishlistItem
 {
-    /** @var int */
-    private $id;
+    private ?int $id = null;
+    private Participant $participant;
+    private ?string $description = '';
+    private int $rank = 0;
 
-    /** @var Participant */
-    private $participant;
-
-    /** @var string */
-    private $description;
-
-    /** @var string */
-    private $image;
-
-    /** @var int */
-    private $rank;
-
-    /** @return int */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @param string $description
-     *
-     * @return WishlistItem
-     */
-    public function setDescription($description)
+    public function setDescription(?string $description): self
     {
+        if (null === $description) {
+            $description = '';
+        }
         $this->description = $description;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
-        return $this->description;
+        return (string) $this->description;
     }
 
-    /**
-     * @param string $image
-     *
-     * @return WishlistItem
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param int $rank
-     *
-     * @return WishlistItem
-     */
-    public function setRank($rank)
+    public function setRank(int $rank): self
     {
         $this->rank = $rank;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getRank()
+    public function getRank(): int
     {
         return $this->rank;
     }
 
-    /**
-     * @return Participant
-     */
-    public function getParticipant()
+    public function getParticipant(): Participant
     {
         return $this->participant;
     }
 
-    /**
-     * @param Participant $participant
-     */
-    public function setParticipant($participant)
+    public function setParticipant(Participant $participant): void
     {
         $this->participant = $participant;
     }
