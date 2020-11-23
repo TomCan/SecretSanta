@@ -1,6 +1,7 @@
 // webpack.config.js
 var Encore = require('@symfony/webpack-encore');
 var path = require('path');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 Encore
     .setOutputPath('public/build/')
@@ -36,6 +37,12 @@ Encore
     .addStyleEntry('css/update', './assets/css/update.css')
     .addStyleEntry('css/report', './assets/css/report.css')
     .addStyleEntry('css/mediaqueries', './assets/css/mediaqueries.css')
+
+    .addPlugin(new CopyWebpackPlugin({
+            patterns: [
+                {to: 'img', from: './assets/img'}
+            ]
+        }))
 
     .enableSourceMaps(!Encore.isProduction())
 ;
